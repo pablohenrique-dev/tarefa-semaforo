@@ -7,7 +7,7 @@
 #define LED_GREEN_PIN 11
 #define INTERVAL_MS 3000
 
-volatile int led_state = 0; // Controla o estado do semáforo
+volatile int led_state = 0; // Começa no estado 0, que é o vermelho
 
 bool repeating_timer_callback(struct repeating_timer *t)
 {
@@ -47,6 +47,9 @@ int main()
     gpio_set_dir(LED_YELLOW_PIN, GPIO_OUT);
     gpio_init(LED_GREEN_PIN);
     gpio_set_dir(LED_GREEN_PIN, GPIO_OUT);
+
+    // Garante que o LED vermelho está ligado inicialmente
+    gpio_put(LED_RED_PIN, 1);
 
     struct repeating_timer timer;
 
